@@ -4,8 +4,7 @@ const mongoose = require("mongoose");
 
 const PORT = process.env.PORT || 3000;
 
-const DB_HOST =
-  "mongodb+srv://Maksim:sBw1CR6ePLbtgbFz@cluster0.wwe6ykf.mongodb.net/fine-scents-db?retryWrites=true&w=majority";
+const { DB_HOST } = require("./config");
 
 mongoose
   .connect(DB_HOST)
