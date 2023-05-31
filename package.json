@@ -15,8 +15,8 @@
   },
   "homepage": "https://github.com/MaksimLisovoi/fine-scents-backend#readme",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node ./bin/server.js",
-    "start:dev": "cross-env NODE_ENV=development nodemon ./bin/server.js",
+    "start": "cross-env NODE_ENV=production node ./server.js",
+    "start:dev": "cross-env NODE_ENV=development nodemon ./server.js",
     "lint": "eslint **/*.js",
     "lint:fix": "eslint --fix **/*.js"
   },
@@ -26,6 +26,7 @@
     "express": "4.17.1",
     "joi": "^17.4.0",
     "lowdb": "^2.1.0",
+    "mongoose": "^7.2.2",
     "morgan": "1.10.0",
     "uuid": "^8.3.2"
   },
