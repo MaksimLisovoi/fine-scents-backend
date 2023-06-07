@@ -3,13 +3,20 @@ const { Product } = require("../models/product");
 const { HttpError, ctrlWrapper } = require("../helpers");
 
 const getAll = async (req, res, next) => {
-  const result = await Product.find();
-  return res.json({ status: "success", code: 200, result });
+  const products = await Product.find();
+  console.log(req.query);
+  return res.json({ status: "success", code: 200, products });
+};
+
+const getBestsellers = async (req, res, next) => {
+  const products = await Product.find({ isBestseller: true }).exec();
+  return res.json({ status: "success", code: 200, products });
 };
 
 const getById = async (req, res, next) => {
   const { productId } = req.params;
-  const product = await Product.findOne({ _id: productId });
+  // const product = await Product.findOne({ _id: productId });
+  const product = await Product.findById({ productId });
   if (!product) {
     throw HttpError(404, "Not Found");
   }
@@ -62,6 +69,7 @@ const updateFavorite = async (req, res, next) => {
 
 module.exports = {
   getAll: ctrlWrapper(getAll),
+  getBestsellers: ctrlWrapper(getBestsellers),
   getById: ctrlWrapper(getById),
   add: ctrlWrapper(add),
   deleteProduct: ctrlWrapper(deleteProduct),

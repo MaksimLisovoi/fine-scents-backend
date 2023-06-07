@@ -11,6 +11,8 @@ const ctrl = require("../../controllers/products");
 
 router.get("/", ctrl.getAll);
 
+router.get("/bestsellers", ctrl.getBestsellers);
+
 router.get("/:productId", isValidId, ctrl.getById);
 
 router.post("/", validationCreateProduct, ctrl.add);
