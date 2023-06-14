@@ -3,7 +3,14 @@ const { Product } = require("../models/product");
 const { HttpError, ctrlWrapper } = require("../helpers");
 
 const getAll = async (req, res, next) => {
-  const products = await Product.find();
+  const { category, q } = req.query;
+
+  let query = {};
+  if (q) {
+    query = { $text: { $search: q } };
+  }
+  if (category) query.category = category;
+  const products = await Product.find(query);
   console.log(req.query);
   return res.json({ status: "success", code: 200, products });
 };
@@ -14,9 +21,11 @@ const getBestsellers = async (req, res, next) => {
 };
 
 const getById = async (req, res, next) => {
+  console.log(req.params);
   const { productId } = req.params;
+  console.log(productId);
   // const product = await Product.findOne({ _id: productId });
-  const product = await Product.findById({ productId });
+  const product = await Product.findById(productId);
   if (!product) {
     throw HttpError(404, "Not Found");
   }

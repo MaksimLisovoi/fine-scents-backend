@@ -1,5 +1,8 @@
 const { schemas } = require("../../models/product.js");
 const { schemas: userSchemas } = require("../../models/user");
+const {
+  schemas: applyingTypeSchemas,
+} = require("../../models/applyingType.js");
 
 const validate = async (schema, obj, next) => {
   try {
@@ -25,5 +28,12 @@ module.exports = {
   },
   validationUpdateProduct: (req, res, next) => {
     return validate(schemas.schemaUpdateIsBestseller, req.body, next);
+  },
+  validationCreateApplyingType: (req, res, next) => {
+    return validate(
+      applyingTypeSchemas.schemaCreateApplyingType,
+      req.body,
+      next
+    );
   },
 };
